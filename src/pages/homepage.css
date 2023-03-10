@@ -1,0 +1,13 @@
+.description {
+    height: 50vh;
+    text-align: center;
+}
+
+p {
+    font-size: 3rem;
+    margin: 0;
+}
+
+.options {
+    height: 50vh;
+}
