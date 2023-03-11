@@ -6,8 +6,23 @@
 p {
     font-size: 3rem;
     margin: 0;
+    color: #8ae9c1;
 }
 
-.options {
-    height: 50vh;
+.desc {
+    font-size: 2rem;
+}
+
+.topic,
+.code {
+    width: 100%;
+}
+
+.options-input {
+    width: 100%;
+}
+
+
+.new-poll, .enter-poll {
+    background-color: #8ae9c1;
 }
