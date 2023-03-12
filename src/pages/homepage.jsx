@@ -1,9 +1,15 @@
 import './homepage.css'
 
-function Homepage() {
+function Homepage(props) {
+    const {newPoll} = props
     function newPollSubmit(e) {
         e.preventDefault()
-        console.log(e.target[0].value, e.target[1].value)
+        const optionsData = e.target[1].value.split(',')
+        let finalOptionsArr = []
+        for (let i = 0; i < optionsData.length; i++) {
+            finalOptionsArr.push({opt: optionsData[i], votes: 0})
+        }
+        newPoll(e.target[0].value, finalOptionsArr)
     }
     return (
         <div className="homepage">
