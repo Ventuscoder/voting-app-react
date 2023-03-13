@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import './App.css'
 import Homepage from './pages/homepage'
+import NewPollPage from './pages/newpollpage'
 
 function App() {
 
@@ -29,6 +30,7 @@ function App() {
   return (
     <div className="App container-fluid">
       {isHomepage && <Homepage newPoll={newPoll} />}
+      {isNewpollpage && <NewPollPage pollId={currentPollId} />}
     </div>
   )
 }
