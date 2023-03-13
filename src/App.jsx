@@ -7,6 +7,8 @@ function App() {
   const [isHomepage, setIsHomepage] = useState(true)
   const [isNewpollpage, setIsNewpollpage] = useState(false)
   const [isPollpage, setIsPollpage] = useState(false)
+  const [currentPollId, setCurrentPollId] = useState('')
+  console.log(currentPollId)
 
   function newPoll(topic, options) {
     const newData = JSON.stringify({topic, options})
@@ -16,7 +18,12 @@ function App() {
       headers: {
         "Content-type": "application/json"
       }
-    }).then(response=>response.json()).then(json=>console.log(json))
+    }).then(response=>response.json()).then(json=>{
+      setCurrentPollId(json._id)
+      console.log(currentPollId)
+      setIsHomepage(false)
+      setIsNewpollpage(true)
+    })
   }
 
   return (
