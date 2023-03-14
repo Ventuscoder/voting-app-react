@@ -1,7 +1,7 @@
 import './homepage.css'
 
 function Homepage(props) {
-    const {newPoll} = props
+    const {newPoll, enterPoll} = props
     function newPollSubmit(e) {
         e.preventDefault()
         const optionsData = e.target[1].value.split(',')
@@ -11,6 +11,13 @@ function Homepage(props) {
         }
         newPoll(e.target[0].value, finalOptionsArr)
     }
+
+    function enterPollSubmit(e) {
+        e.preventDefault()
+        const code = e.target[0].value
+        enterPoll(code)
+    }
+
     return (
         <div className="homepage">
             <div className='description pt-4 pb-4 row'>
@@ -32,9 +39,9 @@ function Homepage(props) {
                 </div>
                 <div className="col-md-6 option">
                     <p className='desc'>Enter a poll</p>
-                    <form onSubmit={newPollSubmit}>
+                    <form onSubmit={enterPollSubmit}>
                         <input type="text" name='code' className='code p-2 mt-2 mb-2' placeholder='Enter the poll code' required />
-                        <button type="submit" className="enter-poll rounded p-2">Create poll</button>
+                        <button type="submit" className="enter-poll rounded p-2">Enter poll</button>
                     </form>
                 </div>
                 

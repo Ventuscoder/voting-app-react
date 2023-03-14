@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import './App.css'
 import Homepage from './pages/homepage'
 import NewPollPage from './pages/newpollpage'
+import PollPage from './pages/pollpage'
 
 function App() {
 
@@ -9,6 +10,8 @@ function App() {
   const [isNewpollpage, setIsNewpollpage] = useState(false)
   const [isPollpage, setIsPollpage] = useState(false)
   const [currentPollId, setCurrentPollId] = useState('')
+  const [currentPollData, setCurrentPollData] = useState({})
+  const [pollDataLoaded, setPollDataLoaded] = useState(false)
   console.log(currentPollId)
 
   function newPoll(topic, options) {
@@ -27,10 +30,28 @@ function App() {
     })
   }
 
+  function enterPoll(code) {
+    /* const data = await fetch(`http://localhost:8000/enter/${code}`)
+    if (data == 'Data not found') {
+      setCurrentPollData(JSON.parse(data))
+      setIsHomepage(false)
+      setIsPollpage(true)
+    } */
+    fetch(`http://localhost:8000/enter/${code}`).then(response=>{
+      if (response != 'Data not found') {
+        setPollDataLoaded(true)
+        response.json().then(json=>setCurrentPollData(json))
+      }
+      setIsHomepage(false)
+      setIsPollpage(true)
+    })
+  }
+
   return (
     <div className="App container-fluid">
-      {isHomepage && <Homepage newPoll={newPoll} />}
+      {isHomepage && <Homepage newPoll={newPoll} enterPoll={enterPoll} />}
       {isNewpollpage && <NewPollPage pollId={currentPollId} />}
+      {isPollpage && <PollPage hasError={!pollDataLoaded} pollData={currentPollData} />}
     </div>
   )
 }
