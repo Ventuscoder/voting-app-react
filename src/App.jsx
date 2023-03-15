@@ -39,8 +39,7 @@ function App() {
     } */
     fetch(`http://localhost:8000/enter/${code}`).then(response=>{
       if (response != 'Data not found') {
-        setPollDataLoaded(true)
-        response.json().then(json=>setCurrentPollData(json))
+        response.json().then(json=>{setPollDataLoaded(true);setCurrentPollData(json)})
       }
       setIsHomepage(false)
       setIsPollpage(true)
