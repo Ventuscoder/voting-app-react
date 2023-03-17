@@ -11,7 +11,10 @@ function PollPage(props) {
     }
 
     function onPollSubmit() {
-        console.log(currentPoll)
+        console.log(pollData._id, currentPoll)
+        fetch(`http://localhost:8000/update/${pollData._id}/${currentPoll}`).then(response=>{
+            response.json().then(json=>console.log(json))
+        })
     }
 
     function loadPoll() {
