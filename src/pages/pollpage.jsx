@@ -10,14 +10,18 @@ function PollPage(props) {
         setCurrentPoll(e.target.id)
     }
 
+    function onPollSubmit() {
+        console.log(currentPoll)
+    }
+
     function loadPoll() {
         return (
             <div>
-                <div class='row'>
-                    <div class='poll-header m-2'>{pollData.topic}</div>
-                    {pollData.options.map(option=>(<Option optData={option} id={option._id} hasSelected={currentPoll==option._id} hasSubmitted={false} onSelect={onSelect} />))}
+                <div className='row'>
+                    <div className='poll-header m-2'>{pollData.topic}</div>
+                    {pollData.options.map(option=>(<Option key={option._id} optData={option} id={option._id} hasSelected={currentPoll==option._id} hasSubmitted={false} onSelect={onSelect} />))}
                 </div>
-                <button className='submit-poll rounded m-2 p-3'>Submit your response</button>
+                <button onClick={onPollSubmit} className='submit-poll rounded m-2 p-3'>Submit your response</button>
             </div>
         )
     }
