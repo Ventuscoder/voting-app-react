@@ -1,18 +1,23 @@
 import './pollpage.css'
 import Option from '../components/option'
+import { useState } from 'react'
 
 function PollPage(props) {
     const {pollData, hasError} = props
+    const [currentPoll, setCurrentPoll] = useState('')
 
     function onSelect(e) {
-        console.log(e.target.innerText)
+        setCurrentPoll(e.target.id)
     }
 
     function loadPoll() {
         return (
             <div>
-                {pollData.options.map(option=>(<Option optData={option} hasSubmitted={false} onSelect={onSelect} />))}
-                <button className='submit-poll rounded'>Submit your response</button>
+                <div class='row'>
+                    <div class='poll-header m-2'>{pollData.topic}</div>
+                    {pollData.options.map(option=>(<Option optData={option} id={option._id} hasSelected={currentPoll==option._id} hasSubmitted={false} onSelect={onSelect} />))}
+                </div>
+                <button className='submit-poll rounded m-2 p-3'>Submit your response</button>
             </div>
         )
     }
