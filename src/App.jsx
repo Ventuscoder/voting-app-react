@@ -39,10 +39,8 @@ function App() {
     } */
     fetch(`http://localhost:8000/enter/${code}`).then(response=>{
       if (response != 'Data not found') {
-        response.json().then(json=>{setPollDataLoaded(true);setCurrentPollData(json)})
+        response.json().then(json=>{setPollDataLoaded(true);setCurrentPollData(json);setIsHomepage(false);setIsPollpage(true)})
       }
-      setIsHomepage(false)
-      setIsPollpage(true)
     })
   }
 
