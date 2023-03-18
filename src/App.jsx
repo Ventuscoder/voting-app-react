@@ -12,9 +12,11 @@ function App() {
   const [currentPollId, setCurrentPollId] = useState('')
   const [currentPollData, setCurrentPollData] = useState({})
   const [pollDataLoaded, setPollDataLoaded] = useState(false)
+  const [loading, setLoading] = useState(false)
   console.log(currentPollId)
 
   function newPoll(topic, options) {
+    setLoading(true)
     const newData = JSON.stringify({topic, options})
     fetch('http://localhost:8000/new', {
       method: 'POST',
@@ -27,6 +29,7 @@ function App() {
       console.log(currentPollId)
       setIsHomepage(false)
       setIsNewpollpage(true)
+      setLoading(false)
     })
   }
 
@@ -37,9 +40,16 @@ function App() {
       setIsHomepage(false)
       setIsPollpage(true)
     } */
+    setLoading(true)
     fetch(`http://localhost:8000/enter/${code}`).then(response=>{
       if (response != 'Data not found') {
-        response.json().then(json=>{setPollDataLoaded(true);setCurrentPollData(json);setIsHomepage(false);setIsPollpage(true)})
+        response.json().then(json=>{
+          setPollDataLoaded(true);
+          setCurrentPollData(json);
+          setIsHomepage(false);
+          setIsPollpage(true);
+          setLoading(false)
+        })
       }
     })
   }
@@ -49,6 +59,7 @@ function App() {
       {isHomepage && <Homepage newPoll={newPoll} enterPoll={enterPoll} />}
       {isNewpollpage && <NewPollPage pollId={currentPollId} />}
       {isPollpage && <PollPage hasError={!pollDataLoaded} pollData={currentPollData} />}
+      {loading && <h2 className='m-2 poll-header'>Loading, please wait...</h2>}
     </div>
   )
 }
