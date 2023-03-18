@@ -2,7 +2,7 @@
     font-weight: bold;
 }
 
-.poll-header, .poll-thanks {
+.poll-header, .poll-thanks, .poll-loading {
     font-size: 3rem;
     color: #8ae9c8;
 }

@@ -7,16 +7,21 @@ function PollPage(props) {
     const [currentPoll, setCurrentPoll] = useState('')
     const [pollDataState, setPollDataState] = useState(pollData)
     const [hasSubmitted, setHasSubmitted] = useState(false)
-    console.log(pollDataState)
+    const [submitLoading, setSubmitLoading] = useState(false)
 
     function onSelect(e) {
         setCurrentPoll(e.target.id)
     }
 
     function onPollSubmit() {
+        setSubmitLoading(true)
         console.log(pollDataState._id, currentPoll)
         fetch(`http://localhost:8000/update/${pollDataState._id}/${currentPoll}`).then(response=>{
-            response.json().then(json=>{setPollDataState(json);setHasSubmitted(true)})
+            response.json().then(json=>{
+                setPollDataState(json)
+                setHasSubmitted(true)
+                setSubmitLoading(false)
+            })
         })
     }
 
@@ -30,7 +35,8 @@ function PollPage(props) {
                 {!hasSubmitted &&
                 <button onClick={onPollSubmit} className='submit-poll rounded m-2 p-3'>Submit your response</button>
                 }
-                {hasSubmitted ? <div className='poll-thanks m-2'><h3>Thank you for voting!</h3></div> : null}
+                {hasSubmitted && <div className='poll-thanks m-2'><h3>Thank you for voting!</h3></div>}
+                {submitLoading && <div className='poll-loading m-2'><h3>Submitting...</h3></div>}
             </div>
         )
     }
