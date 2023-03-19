@@ -18,7 +18,7 @@ function App() {
   function newPoll(topic, options) {
     setLoading(true)
     const newData = JSON.stringify({topic, options})
-    fetch('http://localhost:8000/new', {
+    fetch('https://voting-app-server-e3h5.onrender.com/new', {
       method: 'POST',
       body: newData,
       headers: {
@@ -41,7 +41,7 @@ function App() {
       setIsPollpage(true)
     } */
     setLoading(true)
-    fetch(`http://localhost:8000/enter/${code}`).then(response=>{
+    fetch(`https://voting-app-server-e3h5.onrender.com/enter/${code}`).then(response=>{
       if (response != 'Data not found') {
         response.json().then(json=>{
           setPollDataLoaded(true);

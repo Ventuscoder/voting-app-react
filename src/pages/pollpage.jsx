@@ -16,7 +16,7 @@ function PollPage(props) {
     function onPollSubmit() {
         setSubmitLoading(true)
         console.log(pollDataState._id, currentPoll)
-        fetch(`http://localhost:8000/update/${pollDataState._id}/${currentPoll}`).then(response=>{
+        fetch(`https://voting-app-server-e3h5.onrender.com/update/${pollDataState._id}/${currentPoll}`).then(response=>{
             response.json().then(json=>{
                 setPollDataState(json)
                 setHasSubmitted(true)
